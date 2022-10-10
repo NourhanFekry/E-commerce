@@ -107,7 +107,7 @@ public class P03_homePage {
 
     @FindBy(css = "button[class=\"button-2 add-to-wishlist-button\"]")
     public List<WebElement> wishlistButtons;
-    
+
     @FindBy(id="bar-notification")
     public WebElement successMessage;
 //    @FindBy(xpath = "//*[@id=\"bar-notification\"]/div")
@@ -120,10 +120,12 @@ public class P03_homePage {
     @FindBy(className = "wishlist-label")
     public WebElement wishlistLabel;
 
-    @FindBy(className = "qty-input")
-    public WebElement wishlistQty;
+     public WebElement getWishlistQty()
+     {
+         return driver.findElement(By.cssSelector("span[class=\"wishlist-label\"]"));
+     }
 
-   //for hoverCategories feature
+    //for hoverCategories feature
     public WebElement categoryList(){
         return driver.findElement(By.cssSelector("div[class=\"page-title\"]"));
     }

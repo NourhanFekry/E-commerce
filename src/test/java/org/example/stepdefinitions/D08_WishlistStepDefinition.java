@@ -4,9 +4,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.example.pages.P03_homePage;
-import org.openqa.selenium.support.Color;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.asserts.SoftAssert;
 
@@ -21,44 +18,45 @@ public class D08_WishlistStepDefinition
        Thread.sleep(2000);
    }
 
-
    @Then("success message is visible")
     public void seeGreenMessage() throws InterruptedException {
        Assert.assertTrue(homeWishlistObj.notificationBar().isDisplayed());
-//       Thread.sleep(3000);
-//       soft.assertTrue(homeWishlistObj.successMessage.getText().contains("The product has been added to your wishlist"),"First Assertion");
-//       String actual = homeWishlistObj.successMessage.getCssValue("background-color");
-//       String expected = "rgba(75, 176, 122, 1)";
-//       soft.assertEquals(actual, expected, "color-Second Assertion");
-//       soft.assertAll();
+       Thread.sleep(3000);
+       soft.assertTrue(homeWishlistObj.successMessage.getText().contains("The product has been added to your wishlist"),"First Assertion");
+       String actual = homeWishlistObj.successMessage.getCssValue("background-color");
+       String expected = "rgba(75, 176, 122, 1)";
+       soft.assertEquals(actual, expected, "color-Second Assertion");
+       soft.assertAll();
    }
-
+    int number;
     @And ("user get the number wishlist items")
     public void getNumberItems()
     {
+      String text = homeWishlistObj.getWishlistQty().getText();
+      text= text.replaceAll("[^0-9]","");
+      number = Integer.parseInt(text);
+    }
+
+    @Then ("number of wishlist increased")
+    public void numIncreased()
+    {
+        Assert.assertTrue(number>0);
 
     }
 
 
-
-
-
-
-
-
-
-    @And("user clicks on wishlist on Notification bar")
-    public void wait_and_click() {
+//    @And("user clicks on wishlist on Notification bar")
+//    public void wait_and_click() {
 //        WebDriverWait wait = new WebDriverWait(Hooks.driver, 20);
 //        wait.until(ExpectedConditions.invisibilityOf(homeWishlistObj.barNotification));
 //        homeWishlistObj.wishlistLabel.click();
-    }
-
-    @Then("user will see product in wishlist")
-    public void verify_qty(){
-        soft.assertNotEquals(homeWishlistObj.wishlistQty.getText(),"0");
-        soft.assertAll();
-    }
+//    }
+//
+//    @Then("user will see product in wishlist")
+//    public void verify_qty(){
+//        soft.assertNotEquals(homeWishlistObj.getWishlistQty().getText(),"0");
+//        soft.assertAll();
+//    }
 
 }
 

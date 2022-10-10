@@ -3,10 +3,11 @@ Feature: F08_Wishlist|users could add an item to their wishlist and then check i
 
   Scenario: user adds an item to the wishlist
     When user clicks on wishlist button on product
-    Then user will see a green success message
+    Then success message is visible
 
 
   Scenario: user adds an item to the wishlist and checks wishlist
     When user clicks on wishlist button on product
-    And  user clicks on wishlist on Notification bar
-    Then user will see product in wishlist
+    Then  success message is visible
+    And user get the number wishlist items
+    Then number of wishlist increased
